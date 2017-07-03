@@ -1,4 +1,4 @@
-
+require('dotenv').config({ silent: true })
 var express = require('express')
 var path = require('path')
 var favicon = require('serve-favicon')
@@ -6,9 +6,12 @@ var logger = require('morgan')
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 var exphbs = require('express-handlebars')
+var session = require('express-session')
+var flash = require('connect-flash')
 
 var routes = require('./routes/index')
 var users = require('./routes/user')
+var projects = require('./routes/project')
 
 var app = express()
 
@@ -34,11 +37,17 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-// setup json files for all app
-app.locals.repos = require('./repos.json')
+// setup session & flash
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true
+}))
+app.use(flash())
 
 app.use('/', routes)
 app.use('/users', users)
+app.use('/projects', projects)
 
 // / catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -4,15 +4,29 @@
   <!-- <p>Welcome to {{ title }}, add your project here</p> -->
   <div class="row text-center">
     <h2 class="page-header">Add New Project</h2>
+    {{!-- PARTIALIZE THIS  --}}
+    {{#if flash.error}}
+      <div class="alert alert-danger">{{ flash.error }}</div>
+    {{/if}}
+
     <form method="post" action="/projects" class="form-inline">
       <div class="form-group">
-        <input type="text" class="form-control" id="project_name" name="project[name]" placeholder="Project Name">
+        <input type="text" class="form-control" name="project[name]" placeholder="Project Name">
       </div>
       <div class="form-group">
-        <input type="text" class="form-control" id="project_github" name="project[github]" placeholder="Github URL">
+        <input type="text" class="form-control" name="project[github]" placeholder="Github URL">
       </div>
       <div class="form-group">
-        <input type="text" class="form-control" id="project_public" name="project[public]" placeholder="Public URL">
+        <input type="text" class="form-control" name="project[public]" placeholder="Public URL">
+      </div>
+      <div class="form-group">
+        <select class="form-control" name="project[category]">
+          <option value="1">Project 1</option>
+          <option value="2">Project 2</option>
+          <option value="3">Project 3</option>
+          <option value="4">Project 4</option>
+          <option value="5">Other</option>
+        </select>
       </div>
       <button type="submit" class="btn btn-primary">Create</button>
     </form>
@@ -29,8 +43,8 @@
           </p>
 
           <div class="btn-group btn-group-justified" role="group">
-            <a href="{this.url}" class="btn btn-primary" role="button">Github</a>
-            <a href="{this.public}" class="btn btn-info" role="button">Heroku</a>
+            <a href="{{this.github}}" class="btn btn-primary" role="button">Github</a>
+            <a href="{{this.public}}" class="btn btn-info" role="button">Heroku</a>
           </div>
         </div>
       </div>

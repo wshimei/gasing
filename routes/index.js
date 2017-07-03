@@ -1,13 +1,16 @@
 var express = require('express')
 var router = express.Router()
+var repos = require('../repos.json')
 
 /* GET home page. */
 
 router.get('/', function (req, res) {
   let title = 'GA-Sing'
-  let repos = req.app.locals.repos
-  console.log(repos)
-  res.render('index', { title, repos })
+  res.render('index', {
+    title: title,
+    repos: repos,
+    flash: req.flash()
+  })
 })
 
 module.exports = router
