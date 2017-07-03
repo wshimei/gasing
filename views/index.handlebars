@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>{{ title }}</h1>
+
+  <p>Welcome to {{ title }}, add your project here</p>
+
+  <form method="post" action="/projects">
+    <div class="form-group">
+      <input type="text" class="form-control" id="project_name" name="project[name]" placeholder="Project Name">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="project_github" name="project[github]" placeholder="Github URL">
+    </div>
+    <button type="submit" class="btn btn-default">Create</button>
+  </form>
+</div>

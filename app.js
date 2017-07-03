@@ -1,13 +1,14 @@
+
 var express = require('express')
 var path = require('path')
 var favicon = require('serve-favicon')
 var logger = require('morgan')
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
+var exphbs = require('express-handlebars')
 
 var routes = require('./routes/index')
 var users = require('./routes/user')
-var projects = require('./routes/project')
 
 var app = express()
 
@@ -17,8 +18,12 @@ app.locals.ENV_DEVELOPMENT = env == 'development'
 
 // view engine setup
 
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main',
+  partialsDir: ['views/partials/']
+}))
 app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'ejs')
+app.set('view engine', 'handlebars')
 
 // app.use(favicon(__dirname + '/public/img/favicon.ico'));
 app.use(logger('dev'))
@@ -31,7 +36,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', routes)
 app.use('/users', users)
-app.use('/projects', projects)
 
 // / catch 404 and forward to error handler
 app.use(function (req, res, next) {
