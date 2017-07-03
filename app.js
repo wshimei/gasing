@@ -34,6 +34,9 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
+// setup json files for all app
+app.locals.repos = require('./repos.json')
+
 app.use('/', routes)
 app.use('/users', users)
 

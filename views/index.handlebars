@@ -1,15 +1,40 @@
 <div class="container">
   <h1>{{ title }}</h1>
 
-  <p>Welcome to {{ title }}, add your project here</p>
+  <!-- <p>Welcome to {{ title }}, add your project here</p> -->
+  <div class="row text-center">
+    <h2 class="page-header">Add New Project</h2>
+    <form method="post" action="/projects" class="form-inline">
+      <div class="form-group">
+        <input type="text" class="form-control" id="project_name" name="project[name]" placeholder="Project Name">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="project_github" name="project[github]" placeholder="Github URL">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="project_public" name="project[public]" placeholder="Public URL">
+      </div>
+      <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+  </div>
+  <br>
+  <div class="row">
+    {{#each repos}}
+    <div class="col-md-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">{{this.name}}</div>
+        <div class="panel-body">
+          <p>
+            img preview of the repos
+          </p>
 
-  <form method="post" action="/projects">
-    <div class="form-group">
-      <input type="text" class="form-control" id="project_name" name="project[name]" placeholder="Project Name">
+          <div class="btn-group btn-group-justified" role="group">
+            <a href="{this.url}" class="btn btn-primary" role="button">Github</a>
+            <a href="{this.public}" class="btn btn-info" role="button">Heroku</a>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <input type="text" class="form-control" id="project_github" name="project[github]" placeholder="Github URL">
-    </div>
-    <button type="submit" class="btn btn-default">Create</button>
-  </form>
+    {{/each}}
+  </div>
 </div>
