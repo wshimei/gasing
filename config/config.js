@@ -27,7 +27,7 @@ var config = {
       name: 'gasing-mvc'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/gasing-mvc-production'
+    db: process.env.MONGODB_URI
   }
 }
 
