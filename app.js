@@ -1,4 +1,5 @@
 require('dotenv').config({ silent: true })
+var config = require('./config/config')
 var express = require('express')
 var path = require('path')
 var favicon = require('serve-favicon')
@@ -18,6 +19,13 @@ var app = express()
 var env = process.env.NODE_ENV || 'development'
 app.locals.ENV = env
 app.locals.ENV_DEVELOPMENT = env == 'development'
+
+// db setup
+const mongoose = require('mongoose')
+mongoose.connect(config.db, {
+  useMongoClient: true
+})
+mongoose.Promise = global.Promise
 
 // view engine setup
 
