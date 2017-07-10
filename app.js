@@ -9,6 +9,8 @@ var bodyParser = require('body-parser')
 var exphbs = require('express-handlebars')
 var session = require('express-session')
 var flash = require('connect-flash')
+// var MongoStore = require('connect-mongo')(express)
+var passport = require('passport')
 
 var routes = require('./routes/index')
 var users = require('./routes/user')
@@ -49,13 +51,37 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  // store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 app.use(flash())
+// setup passport and passport session
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/', routes)
 app.use('/users', users)
 app.use('/projects', projects)
+
+var passportConfig = require('./config/passport');
+
+// GET /auth/github
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request.  The first step in GitHub authentication will involve redirecting
+//   the user to github.com.  After authorization, GitHub will redirect the user
+//   back to this application at /auth/github/callback
+app.get('/auth/github',
+passport.authenticate('github', { scope: [ 'user:email' ] }),
+function (req, res) {
+  // The request will be redirected to GitHub for authentication, so this
+  // function will not be called.
+})
+
+app.get('/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function (req, res) {
+    res.redirect('/')
+  })
 
 // / catch 404 and forward to error handler
 app.use(function (req, res, next) {

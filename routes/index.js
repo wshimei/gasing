@@ -10,13 +10,15 @@ var Project = require('../app/models/project')
 router.get('/', function (req, res) {
   let title = 'GA-Sing'
 
-  Project.find({}, (err, projects) => {
-    res.render('index', {
-      title: title,
-      repos: projects,
-      flash: req.flash()
-    })
-  })
+  res.send(req.user)
+
+  // Project.find({}, (err, projects) => {
+  //   res.render('index', {
+  //     title: title,
+  //     repos: projects,
+  //     flash: req.flash()
+  //   })
+  // })
 })
 
 module.exports = router
