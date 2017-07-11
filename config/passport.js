@@ -32,7 +32,7 @@ passport.use(new GitHubStrategy({
           var newUser = new User()
           newUser.github.id = profile.id
           newUser.github.avatar_url = profile._json.avatar_url
-          newUser.admin = (profile.id === '1294303') ? true : false
+          newUser.admin = (profile.id === '1294303' || profile.id === '25096079') ? true : false
 
           newUser.save(function (err) {
             if (err) {
