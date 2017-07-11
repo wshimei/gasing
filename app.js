@@ -11,12 +11,26 @@ var session = require('express-session')
 var flash = require('connect-flash')
 // var MongoStore = require('connect-mongo')(express)
 var passport = require('passport')
+var methodOverride = require('method-override')
 
 var routes = require('./routes/index')
 var users = require('./routes/user')
 var projects = require('./routes/project')
 
 var app = express()
+
+// override method through hyperlink
+// app.use(methodOverride('_method'))
+app.use(methodOverride(function (req, res) {
+  res.send(req.query)
+  // if ( req.query._method == 'DELETE' ) {
+  //   // change the original METHOD
+  //   // into DELETE method
+  //   req.method = 'DELETE';
+  //   // and set requested url to /user/12
+  //   req.url = req.path;
+  // }
+}))
 
 var env = process.env.NODE_ENV || 'development'
 app.locals.ENV = env
@@ -51,7 +65,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: true
   // store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 app.use(flash())
@@ -63,8 +77,9 @@ app.use('/', routes)
 app.use('/users', users)
 app.use('/projects', projects)
 
-var passportConfig = require('./config/passport');
+var passportConfig = require('./config/passport')
 
+// TODO: Put this on a separate route file
 // GET /auth/github
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request.  The first step in GitHub authentication will involve redirecting
@@ -82,6 +97,11 @@ app.get('/auth/github/callback',
   function (req, res) {
     res.redirect('/')
   })
+
+app.post('/logout', (req, res) => {
+  req.logout()
+  res.redirect('/')
+})
 
 // / catch 404 and forward to error handler
 app.use(function (req, res, next) {
