@@ -2,6 +2,7 @@
   <h1>{{ title }}</h1>
 
   <!-- <p>Welcome to {{ title }}, add your project here</p> -->
+  {{#if loggedin_user.admin }}
   <div class="row text-center">
     <h2 class="page-header">Add New Project</h2>
     {{!-- PARTIALIZE THIS  --}}
@@ -31,6 +32,7 @@
       <button type="submit" class="btn btn-primary">Create</button>
     </form>
   </div>
+  {{/if}}
   <br>
   <div class="row">
     {{#each repos}}

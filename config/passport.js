@@ -1,5 +1,7 @@
 var passport = require('passport')
 var GitHubStrategy = require('passport-github2').Strategy
+var User = require('../app/models/user')
+var config = require('./config')
 
 passport.serializeUser(function (user, done) {
   done(null, user)
@@ -12,7 +14,7 @@ passport.deserializeUser(function (obj, done) {
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: 'http://localhost:3000/auth/github/callback'
+  callbackURL: config.github_callback
 },
   function (accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
@@ -21,7 +23,26 @@ passport.use(new GitHubStrategy({
       // represent the logged-in user.  In a typical application, you would want
       // to associate the GitHub account with a user record in your database,
       // and return that user instead.
-      return done(null, profile)
+
+      User.findOne({ 'github.id': profile.id }, function (err, user) {
+        if (err) return done(err)
+        if (user) {
+          return done(null, user)
+        } else {
+          var newUser = new User()
+          newUser.github.id = profile.id
+          newUser.github.avatar_url = profile._json.avatar_url
+          newUser.admin = (profile.id === '1294303') ? true : false
+
+          newUser.save(function (err) {
+            if (err) {
+              throw err
+            }
+
+            return done(null, newUser)
+          })
+        }
+      })
     })
   }
 ))

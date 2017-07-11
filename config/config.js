@@ -9,7 +9,8 @@ var config = {
       name: 'gasing-mvc'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/gasing-mvc-development'
+    db: 'mongodb://localhost/gasing-mvc-development',
+    github_callback: 'http://localhost:3000/auth/github/callback'
   },
 
   test: {
@@ -27,7 +28,8 @@ var config = {
       name: 'gasing-mvc'
     },
     port: process.env.PORT || 3000,
-    db: process.env.MONGODB_URI
+    db: process.env.MONGODB_URI,
+    github_callback: 'https://gasing.herokuapp.com/auth/github/callback'
   }
 }
 

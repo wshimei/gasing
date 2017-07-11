@@ -30,19 +30,20 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <div class="nav navbar-nav navbar-right">
           {{#if loggedin_user}}
+          <form method="POST" action="/logout/{{_id}}?_method=DELETE">
+            <button class="btn btn-social btn-github navbar-btn">
+              <span class="fa fa-github"></span> Logout
+            </button>
+          </form>
+          {{else}}
           <a href="/auth/github" class="btn btn-social btn-github navbar-btn">
             <span class="fa fa-github"></span> Login
-          </a>
-          {{else}}
-          <a href="/logout?_method=post" class="btn btn-social btn-github navbar-btn">
-            <span class="fa fa-github"></span> Logout
           </a>
           {{/if}}
         </div>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-
 
   {{{body}}}
 

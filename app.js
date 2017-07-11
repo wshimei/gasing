@@ -19,19 +19,6 @@ var projects = require('./routes/project')
 
 var app = express()
 
-// override method through hyperlink
-// app.use(methodOverride('_method'))
-app.use(methodOverride(function (req, res) {
-  res.send(req.query)
-  // if ( req.query._method == 'DELETE' ) {
-  //   // change the original METHOD
-  //   // into DELETE method
-  //   req.method = 'DELETE';
-  //   // and set requested url to /user/12
-  //   req.url = req.path;
-  // }
-}))
-
 var env = process.env.NODE_ENV || 'development'
 app.locals.ENV = env
 app.locals.ENV_DEVELOPMENT = env == 'development'
@@ -47,7 +34,12 @@ mongoose.Promise = global.Promise
 
 app.engine('handlebars', exphbs({
   defaultLayout: 'main',
-  partialsDir: ['views/partials/']
+  partialsDir: ['views/partials/'],
+  helpers: {
+    json: function (context) {
+      return JSON.stringify(context)
+    }
+  }
 }))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'handlebars')
@@ -58,6 +50,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true
 }))
+
+// override method through hyperlink
+app.use(methodOverride('_method'))
+
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -98,7 +94,7 @@ app.get('/auth/github/callback',
     res.redirect('/')
   })
 
-app.post('/logout', (req, res) => {
+app.delete('/logout', (req, res) => {
   req.logout()
   res.redirect('/')
 })
