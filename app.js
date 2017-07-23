@@ -35,6 +35,7 @@ mongoose.connect(config.db, {
 mongoose.Promise = global.Promise
 
 // view engine setup
+app.set('views', path.join(config.root, '/app/views'))
 app.engine('handlebars', exphbs(config.hbs))
 app.set('view engine', 'handlebars')
 

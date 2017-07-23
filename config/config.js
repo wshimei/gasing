@@ -12,8 +12,9 @@ var config = {
     db: 'mongodb://localhost/gasing-mvc-development',
     github_callback: 'http://localhost:3000/auth/github/callback',
     hbs: {
+      layoutsDir: rootPath + '/app/views/layouts/',
       defaultLayout: 'main',
-      partialsDir: ['app/views/partials/'],
+      partialsDir: [rootPath + '/app/views/partials/'],
       helpers: {
         json: function (context) {
           return JSON.stringify(context)
