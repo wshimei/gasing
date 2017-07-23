@@ -9,7 +9,7 @@ var config = {
       name: 'gasing-mvc'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/gasing-mvc-development',
+    db: process.env.MONGODB_URI,
     github_callback: 'http://localhost:3000/auth/github/callback',
     hbs: {
       layoutsDir: rootPath + '/app/views/layouts/',

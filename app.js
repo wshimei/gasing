@@ -57,7 +57,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store: new MongoStore({
-    url: 'mongodb://localhost/gasing-mvc-development'
+    url: process.env.MONGODB_URI
   })
 }))
 app.use(flash())
