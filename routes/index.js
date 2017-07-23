@@ -1,8 +1,6 @@
 var express = require('express')
 var router = express.Router()
-var repos = require('../repos.json')
 
-var mongoose = require('mongoose')
 var Project = require('../app/models/project')
 
 /* GET home page. */
@@ -14,7 +12,8 @@ router.get('/', function (req, res) {
     res.render('index', {
       title: title,
       repos: projects,
-      flash: req.flash()
+      flash: req.flash(),
+      loggedin_user: req.user
     })
   })
 })
