@@ -13,7 +13,7 @@ var config = {
     github_callback: 'http://localhost:3000/auth/github/callback',
     hbs: {
       defaultLayout: 'main',
-      partialsDir: ['views/partials/'],
+      partialsDir: ['app/views/partials/'],
       helpers: {
         json: function (context) {
           return JSON.stringify(context)
