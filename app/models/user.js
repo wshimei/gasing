@@ -7,7 +7,11 @@ let userSchema = new Schema({
     id: String,
     avatar_url: String
   },
-  admin: Boolean
+  admin: Boolean,
+  projects: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Project'
+  }]
 })
 
 const User = mongoose.model('User', userSchema)

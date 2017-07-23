@@ -10,7 +10,16 @@ var config = {
     },
     port: process.env.PORT || 3000,
     db: 'mongodb://localhost/gasing-mvc-development',
-    github_callback: 'http://localhost:3000/auth/github/callback'
+    github_callback: 'http://localhost:3000/auth/github/callback',
+    hbs: {
+      defaultLayout: 'main',
+      partialsDir: ['views/partials/'],
+      helpers: {
+        json: function (context) {
+          return JSON.stringify(context)
+        }
+      }
+    }
   },
 
   test: {

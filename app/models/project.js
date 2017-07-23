@@ -5,7 +5,11 @@ let projectSchema = new Schema({
   name: String,
   github: String,
   public: String,
-  category: Number
+  category: Number,
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 })
 
 const Project = mongoose.model('Project', projectSchema)
