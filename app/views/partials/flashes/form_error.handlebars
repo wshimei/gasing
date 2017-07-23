@@ -1,0 +1,11 @@
+{{#if flash.errors }}
+<div class="alert alert-danger text-left">
+  {{#each flash.errors as |fields| }}
+    <ul>
+      {{#each fields as |field|}}
+        <li>{{ field.message }}</li>
+      {{/each}}
+    </ul>
+  {{/each}}
+</div>
+{{/if}}

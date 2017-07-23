@@ -1,14 +1,12 @@
 <div class="container">
   <h1>{{ title }}</h1>
 
-  <!-- <p>Welcome to {{ title }}, add your project here</p> -->
+
   {{#if loggedin_user.admin }}
   <div class="row text-center">
     <h2 class="page-header">Add New Project</h2>
-    {{!-- PARTIALIZE THIS  --}}
-    {{#if flash.error}}
-      <div class="alert alert-danger">{{ flash.error }}</div>
-    {{/if}}
+
+    {{> flashes/form_error }}
 
     <form method="post" action="/projects" class="form-inline">
       <div class="form-group">
@@ -34,23 +32,7 @@
   </div>
   {{/if}}
   <br>
-  <div class="row">
-    {{#each repos}}
-    <div class="col-md-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">{{this.name}}</div>
-        <div class="panel-body">
-          <p>
-            img preview of the repos
-          </p>
 
-          <div class="btn-group btn-group-justified" role="group">
-            <a href="{{this.github}}" class="btn btn-primary" role="button">Github</a>
-            <a href="{{this.public}}" class="btn btn-info" role="button">Heroku</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    {{/each}}
-  </div>
+
+  {{> projects/index }}
 </div>

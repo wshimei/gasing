@@ -16,9 +16,9 @@ var MongoStore = require('connect-mongo')(session)
 var passport = require('passport')
 var methodOverride = require('method-override')
 
-var routes = require('./routes/index')
-var users = require('./routes/user')
-var projects = require('./routes/project')
+var routes = require('./app/routes/index')
+var users = require('./app/routes/user')
+var projects = require('./app/routes/project')
 // var auths = require('./routes/auth')
 
 var app = express()
@@ -64,6 +64,16 @@ app.use(flash())
 // setup passport and passport session
 app.use(passport.initialize())
 app.use(passport.session())
+
+// setup local variables for all views
+app.use(function(req, res, next) {
+  app.locals.flash = {
+    errors: req.flash('errors'),
+    infos: req.flash('infos')
+  }
+
+  next()
+})
 
 app.use('/', routes)
 app.use('/users', users)

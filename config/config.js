@@ -17,7 +17,7 @@ var config = {
       partialsDir: [rootPath + '/app/views/partials/'],
       helpers: {
         json: function (context) {
-          return JSON.stringify(context)
+          return JSON.stringify(context, null, 2)
         }
       }
     }

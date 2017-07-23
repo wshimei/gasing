@@ -1,7 +1,7 @@
 var express = require('express')
 var router = express.Router()
 
-var Project = require('../app/models/project')
+var Project = require('../models/project')
 
 /* GET home page. */
 
@@ -12,7 +12,6 @@ router.get('/', function (req, res) {
     res.render('index', {
       title: title,
       repos: projects,
-      flash: req.flash(),
       loggedin_user: req.user
     })
   })

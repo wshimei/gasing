@@ -1,0 +1,19 @@
+<div class="row">
+  {{#each projects as |project|}}
+  <div class="col-md-4">
+    <div class="panel panel-primary">
+      <div class="panel-heading">{{project.name}}</div>
+      <div class="panel-body">
+        <p>
+          img preview of the repos
+        </p>
+
+        <div class="btn-group btn-group-justified" role="group">
+          <a href="{{project.github}}" class="btn btn-primary" role="button">Github</a>
+          <a href="{{project.public}}" class="btn btn-info" role="button">Heroku</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>

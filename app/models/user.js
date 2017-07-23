@@ -2,7 +2,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 let userSchema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    required: true
+  },
   github: {
     id: String,
     avatar_url: String
