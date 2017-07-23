@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-var app = require('../app');
+var app = require('../app')
 var config = require('../config/config')
 
-app.set('port', config.port || 3000);
+app.set('port', config.port || 3000)
 
-var server = app.listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + server.address().port);
-});
+var server = app.listen(app.get('port'), function () {
+  console.log('Express server listening on port ' + server.address().port)
+})
