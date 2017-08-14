@@ -22,40 +22,34 @@ function create (req, res, next) {
     // console.log('statusCode:', response && response.statusCode) // Print the response status code if a response was received
 
     let projectOwner = JSON.parse(body)
-    User.findOneOrCreate(projectOwner.id.toString(), function (err, user) {
+
+    User.findOneOrCreate(projectOwner, function (err, dbUser) {
       if (err) return res.send(err)
 
-      return res.send(user)
-    })
+      const newProject = new Project({
+        name: req.body.project.name,
+        github: req.body.project.github,
+        public: req.body.project.public,
+        category: req.body.project.category,
+        user: dbUser.id
+      })
 
-    // const newProject = new Project({
-    //   name: req.body.project.name,
-    //   github: req.body.project.github,
-    //   public: req.body.project.public,
-    //   category: req.body.project.category,
-    //   user: projectOwner.id.toString()
-    // })
-    //
-    // // res.send({
-    // //   newProject,
-    // //   owner: projectOwner
-    // // })
-    //
-    // newProject.save((err) => {
-    //   if (err) {
-    //     return res.send({
-    //       err,
-    //       newProject,
-    //       projectOwner,
-    //       projectOwner_str: projectOwner.id.toString()
-    //     })
-    //     // req.flash('errors', err.errors)
-    //     // return next()
-    //   }
-    //
-    //   req.flash('success', 'Created new project')
-    //   return res.redirect('/')
-    // })
+      newProject.save((err) => {
+        if (err) {
+          // return res.send({
+          //   err,
+          //   newProject,
+          //   projectOwner
+          // })
+
+          req.flash('errors', err.errors)
+          return next()
+        }
+
+        req.flash('success', 'Created new project')
+        return res.redirect('/')
+      })
+    })
   })
 }
 

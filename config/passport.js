@@ -27,10 +27,10 @@ passport.use(new GitHubStrategy({
       User.findOne({ 'github.id': profile.id }, function (err, user) {
         if (err) return done(err)
         if (user) {
+          // TODO: refactor this on model
           if (!user.name) {
             user.name = profile.displayName
             user.save(function (err) {
-              console.log(profile, user)
               if (err) return done(err)
               return done(null, user)
             })

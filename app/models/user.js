@@ -13,9 +13,11 @@ let userSchema = new Schema({
   admin: Boolean
 })
 
-userSchema.statics.findOneOrCreate = function (id, cb) {
-  return this.findOne({'github.id': id}, cb).then(user => user ? user : this.create({
-    'github.id': id
+userSchema.statics.findOneOrCreate = function (githubUser, cb) {
+  return this.findOne({'github.id': githubUser.id}).then(user => user ? user : this.create({
+    name: githubUser.name,
+    'github.avatar_url': githubUser.avatar_url,
+    'github.id': githubUser.id
   }, cb))
 }
 
