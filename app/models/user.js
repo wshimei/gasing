@@ -10,12 +10,14 @@ let userSchema = new Schema({
     id: String,
     avatar_url: String
   },
-  admin: Boolean,
-  projects: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Project'
-  }]
+  admin: Boolean
 })
+
+userSchema.statics.findOneOrCreate = function (id, cb) {
+  return this.findOne({'github.id': id}, cb).then(user => user ? user : this.create({
+    'github.id': id
+  }, cb))
+}
 
 const User = mongoose.model('User', userSchema)
 

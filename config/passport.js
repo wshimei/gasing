@@ -27,12 +27,26 @@ passport.use(new GitHubStrategy({
       User.findOne({ 'github.id': profile.id }, function (err, user) {
         if (err) return done(err)
         if (user) {
-          return done(null, user)
+          if (!user.name) {
+            user.name = profile.displayName
+            user.save(function (err) {
+              console.log(profile, user)
+              if (err) return done(err)
+              return done(null, user)
+            })
+          } else {
+            return done(null, user)
+          }
         } else {
           var newUser = new User()
           newUser.github.id = profile.id
           newUser.github.avatar_url = profile._json.avatar_url
-          newUser.admin = (profile.id === '1294303' || profile.id === '25096079') ? true : false
+
+          if (profile.id === '1294303' || profile.id === '25096079') {
+            newUser.admin = true
+          } else {
+            newUser.admin = false
+          }
 
           newUser.save(function (err) {
             if (err) {

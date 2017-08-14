@@ -25,7 +25,7 @@ var app = express()
 
 var env = process.env.NODE_ENV || 'development'
 app.locals.ENV = env
-app.locals.ENV_DEVELOPMENT = env == 'development'
+app.locals.ENV_DEVELOPMENT = env === 'development'
 
 // db setup
 const mongoose = require('mongoose')
@@ -66,7 +66,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 // setup local variables for all views
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   app.locals.flash = {
     errors: req.flash('errors'),
     infos: req.flash('infos')
