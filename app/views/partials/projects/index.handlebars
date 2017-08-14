@@ -5,12 +5,19 @@
       <div class="panel-heading">{{project.name}}</div>
       <div class="panel-body">
         <p>
-          img preview of the repos
+          img preview of the repos - test<br>
+          user: {{../loggedin_user._id}}<br>
+          project: {{project.user}}
         </p>
 
         <div class="btn-group btn-group-justified" role="group">
           <a href="{{project.github}}" class="btn btn-primary" role="button">Github</a>
           <a href="{{project.public}}" class="btn btn-info" role="button">Heroku</a>
+
+
+          {{#ifCond ../loggedin_user._id project.user }}
+          <a href="{{project.public}}" class="btn btn-danger" role="button">Delete</a>
+          {{/ifCond}}
         </div>
       </div>
     </div>

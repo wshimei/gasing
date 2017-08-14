@@ -9,9 +9,11 @@ router.get('/', function (req, res) {
   let title = 'GA-Sing'
 
   Project.find({}, (err, projects) => {
+    // return res.send(req.user)
+    console.log(req.user.name)
     res.render('index', {
       title: title,
-      repos: projects,
+      projects: projects,
       loggedin_user: req.user
     })
   })
