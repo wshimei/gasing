@@ -26,6 +26,8 @@ function create (req, res, next) {
     User.findOneOrCreate(projectOwner, function (err, dbUser) {
       if (err) return res.send(err)
 
+      // return res.send(dbUser)
+
       const newProject = new Project({
         name: req.body.project.name,
         github: req.body.project.github,
@@ -36,12 +38,6 @@ function create (req, res, next) {
 
       newProject.save((err) => {
         if (err) {
-          // return res.send({
-          //   err,
-          //   newProject,
-          //   projectOwner
-          // })
-
           req.flash('errors', err.errors)
           return next()
         }
@@ -53,6 +49,19 @@ function create (req, res, next) {
   })
 }
 
+function remove (req, res, next) {
+  Project.findByIdAndRemove(req.params.id, function (err, removedProject) {
+    if (err) {
+      req.flash('errors', err.errors)
+      return next()
+    }
+
+    req.flash('warning', 'Deleted a project')
+    return res.redirect('/')
+  })
+}
+
 module.exports = {
-  create
+  create,
+  remove
 }

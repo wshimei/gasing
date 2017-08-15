@@ -10,7 +10,6 @@ router.get('/', function (req, res) {
 
   Project.find({}, (err, projects) => {
     // return res.send(req.user)
-    console.log(req.user.name)
     res.render('index', {
       title: title,
       projects: projects,

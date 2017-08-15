@@ -14,11 +14,25 @@ let userSchema = new Schema({
 })
 
 userSchema.statics.findOneOrCreate = function (githubUser, cb) {
-  return this.findOne({'github.id': githubUser.id}).then(user => user ? user : this.create({
-    name: githubUser.name,
-    'github.avatar_url': githubUser.avatar_url,
-    'github.id': githubUser.id
-  }, cb))
+  return this
+  .findOne({'github.id': githubUser.id})
+  .exec((err, user) => {
+    if (err) cb(err)
+
+    if (user) {
+      cb(null, user)
+    } else {
+      this.create({
+        name: githubUser.name,
+        'github.avatar_url': githubUser.avatar_url,
+        'github.id': githubUser.id
+      }, function (err, createdUser) {
+        if (err) cb(err)
+
+        cb(null, createdUser)
+      })
+    }
+  })
 }
 
 const User = mongoose.model('User', userSchema)

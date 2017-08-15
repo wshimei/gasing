@@ -16,11 +16,6 @@ var MongoStore = require('connect-mongo')(session)
 var passport = require('passport')
 var methodOverride = require('method-override')
 
-var routes = require('./app/routes/index')
-var users = require('./app/routes/user')
-var projects = require('./app/routes/project')
-// var auths = require('./routes/auth')
-
 var app = express()
 
 var env = process.env.NODE_ENV || 'development'
@@ -75,6 +70,11 @@ app.use(function (req, res, next) {
   next()
 })
 
+var routes = require('./app/routes/index')
+var users = require('./app/routes/user')
+var projects = require('./app/routes/project')
+// var auths = require('./routes/auth')
+
 app.use('/', routes)
 app.use('/users', users)
 app.use('/projects', projects)
@@ -101,17 +101,17 @@ function (req, res) {
 
 app.delete('/logout', (req, res) => {
   req.logout()
-  res.redirect('/')
+  return res.redirect('/')
 })
 
-// / catch 404 and forward to error handler
+// catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error('Not Found')
   err.status = 404
   next(err)
 })
 
-// / error handlers
+// error handlers
 
 // development error handler
 // will print stacktrace

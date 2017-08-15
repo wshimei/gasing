@@ -13,12 +13,15 @@
         <div class="btn-group btn-group-justified" role="group">
           <a href="{{project.github}}" class="btn btn-primary" role="button">Github</a>
           <a href="{{project.public}}" class="btn btn-info" role="button">Heroku</a>
-
-
-          {{#ifCond ../loggedin_user._id project.user }}
-          <a href="{{project.public}}" class="btn btn-danger" role="button">Delete</a>
-          {{/ifCond}}
         </div>
+
+        {{#if ../loggedin_user}}
+          {{#ifCond ../loggedin_user._id project.user }}
+          <form method="POST" action="/projects/{{ project._id }}?_method=delete">
+            <button class="btn btn-danger">Delete</button>
+          </form>
+          {{/ifCond}}
+        {{/if}}
       </div>
     </div>
   </div>
