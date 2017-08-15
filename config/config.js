@@ -20,10 +20,13 @@ var config = {
           return JSON.stringify(context, null, 2)
         },
         ifCond: function (v1, v2, options) {
-          if (v1 == v2) {
+          if (v1 === String(v2)) {
             return options.fn(this)
           }
           return options.inverse(this)
+        },
+        isAdmin: function (id) {
+          // if(id =)
         }
       }
     }
