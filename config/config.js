@@ -59,6 +59,17 @@ var config = {
       helpers: {
         json: function (context) {
           return JSON.stringify(context, null, 2)
+        },
+        isOwner: function (loggedinUser, ownerId, options) {
+          // console.log(admins, loggedinUser._id, String(ownerId))
+          if (
+            admins.includes(loggedinUser._id) ||
+            loggedinUser._id === String(ownerId)
+          ) {
+            return options.fn(this)
+          } else {
+            return options.inverse(this)
+          }
         }
       }
     }
