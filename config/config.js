@@ -54,7 +54,17 @@ var config = {
     },
     port: process.env.PORT || 3000,
     db: process.env.MONGODB_URI,
-    github_callback: 'https://gasing.herokuapp.com/auth/github/callback'
+    github_callback: 'https://gasing.herokuapp.com/auth/github/callback',
+    hbs: {
+      layoutsDir: rootPath + '/app/views/layouts/',
+      defaultLayout: 'main',
+      partialsDir: [rootPath + '/app/views/partials/'],
+      helpers: {
+        json: function (context) {
+          return JSON.stringify(context, null, 2)
+        }
+      }
+    }
   }
 }
 
