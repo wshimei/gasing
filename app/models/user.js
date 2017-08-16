@@ -18,16 +18,20 @@ userSchema.statics.findOneOrCreate = function (githubUser, cb) {
   .exec(function (err, user) {
     if (err) cb(err)
 
+    console.log(githubUser)
+
     if (user) {
       cb(null, user)
     } else {
       User.create({
-        name: githubUser.name,
+        name: githubUser.name || githubUser.login,
         'github.avatar_url': githubUser.avatar_url,
         'github.id': githubUser.id
       }, function (err, createdUser) {
-        if (err) cb(err)
+        if (err) return cb(err)
 
+        console.log('created')
+        console.log(createdUser)
         cb(null, createdUser)
       })
     }
