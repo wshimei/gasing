@@ -29,7 +29,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <div class="nav navbar-nav navbar-right">
-          {{#if loggedin_user}}
+          {{#if LOGGEDIN_USER}}
           <form method="POST" action="/logout/{{_id}}?_method=DELETE">
             <button class="btn btn-social btn-github navbar-btn">
               <span class="fa fa-github"></span> Logout
