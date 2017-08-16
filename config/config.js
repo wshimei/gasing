@@ -70,6 +70,7 @@ var config = {
           return JSON.stringify(context, null, 2)
         },
         isOwner: function (loggedinUser, ownerId, options) {
+          console.log(loggedinUser)
           if (loggedinUser) {
             if (
               admins.includes(loggedinUser._id) ||
