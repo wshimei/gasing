@@ -30,6 +30,11 @@ var config = {
           } else {
             return options.inverse(this)
           }
+        },
+        ownerGithub: function (githubLink) {
+          const rgx = /https:\/\/(github\.com)\/(\w+)/
+          githubLink = githubLink.match(rgx)
+          return githubLink[0]
         }
       }
     }

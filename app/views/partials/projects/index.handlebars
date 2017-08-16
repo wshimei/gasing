@@ -1,30 +1,36 @@
 <div class="row">
   {{#each projects as |project|}}
   <div class="col-md-4">
+    {{#isOwner ../LOGGEDIN_USER project.user}}
     <div class="panel panel-primary">
-      <div class="panel-heading">{{project.name}}</div>
+    {{ else }}
+    <div class="panel panel-default">
+    {{/isOwner}}
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          {{ project.name }}
+        </h3>
+      </div>
       <div class="panel-body">
-        <p>
-          img preview of the repos - test<br>
-          user: {{../LOGGEDIN_USER._id}}<br>
-          project: {{project.user}}
+        <p class="lead">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
 
-        <div class="btn-group btn-group-justified" role="group">
+        <form method="POST" action="/projects/{{ project._id }}?_method=delete">
           <a href="{{project.github}}" class="btn btn-primary" role="button">Github</a>
           <a href="{{project.public}}" class="btn btn-info" role="button">Heroku</a>
-        </div>
-
-        {{#if ../LOGGEDIN_USER}}
-          {{!-- {{#ifCond ../LOGGEDIN_USER._id project.user }} --}}
-          {{!-- {{/ifCond}} --}}
-        {{/if}}
-
-        {{#isOwner ../LOGGEDIN_USER project.user}}
-        <form method="POST" action="/projects/{{ project._id }}?_method=delete">
+          {{#isOwner ../LOGGEDIN_USER project.user}}
           <button class="btn btn-danger">Delete</button>
+          {{/isOwner}}
         </form>
-        {{/isOwner}}
+      </div>
+      <div class="panel-footer">
+        <small>
+          created by:
+          <a href="{{ ownerGithub project.github }}" target="_blank">
+            {{ project.user.name }}
+          </a>
+        </small>
       </div>
     </div>
   </div>
