@@ -14,9 +14,8 @@ let userSchema = new Schema({
 })
 
 userSchema.statics.findOneOrCreate = function (githubUser, cb) {
-  return this
-  .findOne({'github.id': githubUser.id})
-  .exec((err, user) => {
+  return this.findOne({'github.id': githubUser.id})
+  .exec(function (err, user) {
     if (err) cb(err)
 
     if (user) {

@@ -36,7 +36,7 @@ function create (req, res, next) {
         user: dbUser.id
       })
 
-      newProject.save((err) => {
+      newProject.save(function (err) {
         if (err) {
           req.flash('errors', err.errors)
           return next()
