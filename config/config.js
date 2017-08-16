@@ -20,12 +20,12 @@ var config = {
         json: function (context) {
           return JSON.stringify(context, null, 2)
         },
-        isOwner: function (loggedinUser, ownerId, options) {
+        isOwner: function (loggedinUser, owner, options) {
           // console.log(admins, loggedinUser._id, String(ownerId))
           if (loggedinUser) {
             if (
               admins.includes(loggedinUser._id) ||
-              loggedinUser._id === String(ownerId)
+              loggedinUser._id === String(owner._id)
             ) {
               return options.fn(this)
             } else {
@@ -69,12 +69,12 @@ var config = {
         json: function (context) {
           return JSON.stringify(context, null, 2)
         },
-        isOwner: function (loggedinUser, ownerId, options) {
-          console.log(loggedinUser)
+        isOwner: function (loggedinUser, owner, options) {
+          // console.log(admins, loggedinUser._id, String(ownerId))
           if (loggedinUser) {
             if (
               admins.includes(loggedinUser._id) ||
-              loggedinUser._id === String(ownerId)
+              loggedinUser._id === String(owner._id)
             ) {
               return options.fn(this)
             } else {
