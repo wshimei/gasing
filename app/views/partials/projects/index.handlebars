@@ -18,7 +18,7 @@
 
         <form method="POST" action="/projects/{{ project._id }}?_method=delete">
           <a href="{{project.github}}" class="btn btn-primary" role="button">Github</a>
-          <a href="{{project.public}}" class="btn btn-info" role="button">Heroku</a>
+          <a href="{{project.public}}" class="btn btn-info" role="button">View</a>
           {{#isOwner ../LOGGEDIN_USER project.user}}
           <button class="btn btn-danger">Delete</button>
           {{/isOwner}}
