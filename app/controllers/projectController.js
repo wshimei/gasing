@@ -24,9 +24,7 @@ function create (req, res, next) {
     let projectOwner = JSON.parse(body)
 
     User.findOneOrCreate(projectOwner, function (err, dbUser) {
-      if (err) return res.send(err)
-
-      // return res.send(dbUser)
+      if (err) return next(err)
 
       const newProject = new Project({
         name: req.body.project.name,
@@ -39,7 +37,7 @@ function create (req, res, next) {
       newProject.save(function (err) {
         if (err) {
           req.flash('errors', err.errors)
-          return next()
+          return next(err)
         }
 
         req.flash('success', 'Created new project')

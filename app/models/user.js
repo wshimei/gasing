@@ -21,7 +21,7 @@ userSchema.statics.findOneOrCreate = function (githubUser, cb) {
     if (user) {
       cb(null, user)
     } else {
-      this.create({
+      User.create({
         name: githubUser.name,
         'github.avatar_url': githubUser.avatar_url,
         'github.id': githubUser.id
