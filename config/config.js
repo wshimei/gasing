@@ -1,6 +1,7 @@
 var path = require('path'),
   rootPath = path.normalize(__dirname + '/..'),
-  env = process.env.NODE_ENV || 'development'
+  env = process.env.NODE_ENV || 'development',
+  admins = process.env.ADMINS.split(':')
 
 var config = {
   development: {
@@ -19,11 +20,16 @@ var config = {
         json: function (context) {
           return JSON.stringify(context, null, 2)
         },
-        ifCond: function (v1, v2, options) {
-          if (v1 === String(v2)) {
+        isOwner: function (loggedinUser, ownerId, options) {
+          // console.log(admins, loggedinUser._id, String(ownerId))
+          if (
+            admins.includes(loggedinUser._id) ||
+            loggedinUser._id === String(ownerId)
+          ) {
             return options.fn(this)
+          } else {
+            return options.inverse(this)
           }
-          return options.inverse(this)
         },
         isAdmin: function (id) {
           // if(id =)

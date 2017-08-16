@@ -21,6 +21,7 @@ var app = express()
 var env = process.env.NODE_ENV || 'development'
 app.locals.ENV = env
 app.locals.ENV_DEVELOPMENT = env === 'development'
+app.locals.ADMINS = process.env.ADMINS.split(':')
 
 // db setup
 const mongoose = require('mongoose')
@@ -66,6 +67,8 @@ app.use(function (req, res, next) {
     errors: req.flash('errors'),
     infos: req.flash('infos')
   }
+
+  app.locals.LOGGEDIN_USER = req.user || null
 
   next()
 })

@@ -6,7 +6,7 @@
       <div class="panel-body">
         <p>
           img preview of the repos - test<br>
-          user: {{../loggedin_user._id}}<br>
+          user: {{../LOGGEDIN_USER._id}}<br>
           project: {{project.user}}
         </p>
 
@@ -15,13 +15,16 @@
           <a href="{{project.public}}" class="btn btn-info" role="button">Heroku</a>
         </div>
 
-        {{#if ../loggedin_user}}
-          {{#ifCond ../loggedin_user._id project.user }}
-          <form method="POST" action="/projects/{{ project._id }}?_method=delete">
-            <button class="btn btn-danger">Delete</button>
-          </form>
-          {{/ifCond}}
+        {{#if ../LOGGEDIN_USER}}
+          {{!-- {{#ifCond ../LOGGEDIN_USER._id project.user }} --}}
+          {{!-- {{/ifCond}} --}}
         {{/if}}
+
+        {{#isOwner ../LOGGEDIN_USER project.user}}
+        <form method="POST" action="/projects/{{ project._id }}?_method=delete">
+          <button class="btn btn-danger">Delete</button>
+        </form>
+        {{/isOwner}}
       </div>
     </div>
   </div>
