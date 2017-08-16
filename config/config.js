@@ -30,9 +30,6 @@ var config = {
           } else {
             return options.inverse(this)
           }
-        },
-        isAdmin: function (id) {
-          // if(id =)
         }
       }
     }
