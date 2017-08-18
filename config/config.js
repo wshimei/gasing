@@ -17,6 +17,9 @@ var config = {
       defaultLayout: 'main',
       partialsDir: [rootPath + '/app/views/partials/'],
       helpers: {
+        projectSlug: function (projectName) {
+          return projectName.toLowerCase().replace(/[\?\"\!]/g, '').split(' ').join('-')
+        },
         json: function (context) {
           return JSON.stringify(context, null, 2)
         },
