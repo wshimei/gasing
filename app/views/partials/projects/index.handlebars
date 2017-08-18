@@ -16,23 +16,30 @@
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
 
-        <a href="{{project.github}}" class="btn btn-primary" role="button">
-          <i class="fa fa-github-alt"></i> Github
-        </a>
-        <a href="{{project.public}}" class="btn btn-primary" role="button">
-          <i class="fa fa-eye"></i> Detail
-        </a>
-        <a href="{{project.public}}" class="btn btn-info" role="button">
-          <i class="fa fa-play"></i> View
-        </a>
-        
-        <form method="POST" action="/projects/{{ project._id }}?_method=delete">
-          {{#isOwner ../LOGGEDIN_USER project.user}}
-          <button class="btn btn-danger">
-            <i class="fa fa-trash"></i> Delete
-          </button>
-          {{/isOwner}}
-        </form>
+        <div class="btn-group btn-group-justified" role="group" aria-label="project button groups">
+          <a href="{{project.github}}" class="btn btn-github" role="button">
+            <i class="fa fa-github-alt"></i> Github
+          </a>
+          <a href="{{project.public}}" class="btn btn-github" role="button">
+            <i class="fa fa-eye"></i> Detail
+          </a>
+          <a href="{{project.public}}" class="btn btn-github" role="button">
+            <i class="fa fa-play"></i> View
+          </a>
+        </div>
+
+        <div class="help-block">
+          <form method="POST" action="/projects/{{ project._id }}?_method=delete">
+            {{#isOwner ../LOGGEDIN_USER project.user}}
+            <a href="/project/1" class="btn btn-info btn-block">
+              <i class="fa fa-eraser"></i> Edit
+            </a>
+            <button class="btn btn-block btn-danger">
+              <i class="fa fa-trash"></i> Delete
+            </button>
+            {{/isOwner}}
+          </form>
+        </div>
       </div>
       <div class="panel-footer">
         <small>
