@@ -1,6 +1,6 @@
 <div class="row">
   {{#each projects as |project|}}
-  <div class="col-md-4">
+  <div class="col-md-4 project-card">
     {{#isOwner ../LOGGEDIN_USER project.user}}
     <div class="panel panel-primary">
     {{ else }}

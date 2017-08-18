@@ -36,7 +36,7 @@ var config = {
           }
         },
         ownerGithub: function (githubLink) {
-          const rgx = /https:\/\/(github\.com)\/(\w+)/
+          const rgx = /https:\/\/(github\.com)\/([a-z0-9-_]+)/
           githubLink = githubLink.match(rgx)
           return githubLink[0]
         }

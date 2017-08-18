@@ -5,11 +5,11 @@ const request = require('request')
 function create (req, res, next) {
   const githubApi = 'https://api.github.com'
   const savedProjectGh = req.body.project.github
-  const rgx = /(github\.com)\/(\w+)/
+  const rgx = /\/([a-z0-9-_]+)\//
   let projectOwner = savedProjectGh.match(rgx)
 
   const options = {
-    url: `${githubApi}/users/${projectOwner[2]}`,
+    url: `${githubApi}/users/${projectOwner[1]}`,
     headers: {
       'User-Agent': process.env.GITHUB_APP_NAME
     }
