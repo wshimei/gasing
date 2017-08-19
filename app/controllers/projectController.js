@@ -60,7 +60,21 @@ function remove (req, res, next) {
 }
 
 function show (req, res, next) {
-  res.send(req.params)
+  let projectname = req.params.projectname
+
+  Project
+  .findOne({
+    name: new RegExp('^' + projectname + '$', 'i')
+  })
+  .populate('user')
+  .exec(function (err, foundProject) {
+    if (err) return next(err)
+
+    res.render('projects/show', {
+      params: req.params,
+      foundProject
+    })
+  })
 }
 
 module.exports = {
