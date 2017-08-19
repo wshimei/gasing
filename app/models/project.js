@@ -7,6 +7,9 @@ let projectSchema = new Schema({
     type: String,
     required: [true, 'Please write the project name']
   },
+  slug: {
+    type: String
+  },
   github: {
     type: String,
     required: [true, 'Please write the project github url'],

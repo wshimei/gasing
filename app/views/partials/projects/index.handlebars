@@ -20,7 +20,7 @@
           <a href="{{project.github}}" class="btn btn-github" role="button">
             <i class="fa fa-github-alt"></i> Github
           </a>
-          <a href="/{{ projectSlug project.name }}" class="btn btn-github" role="button">
+          <a href="/projects/{{ project.slug }}" class="btn btn-github" role="button">
             <i class="fa fa-eye"></i> Detail
           </a>
           <a href="/{{project.public}}" class="btn btn-github" role="button">
@@ -31,7 +31,7 @@
         <div class="help-block">
           <form method="POST" action="/projects/{{ project._id }}?_method=delete">
             {{#isOwner ../LOGGEDIN_USER project.user}}
-            <a href="/{{ projectSlug project.name }}/edit" class="btn btn-info btn-block">
+            <a href="/projects/{{ project.slug }}/edit" class="btn btn-info btn-block">
               <i class="fa fa-eraser"></i> Edit
             </a>
             <button class="btn btn-block btn-danger">

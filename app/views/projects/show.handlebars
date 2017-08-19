@@ -1,7 +1,6 @@
 <div class="container">
-  <h1>{{ foundProject.name }}</h1>
   <div class="media">
-    <div class="media-left media-middle">
+    <div class="media-left">
       <a href="{{ ownerGithub foundProject.github }}" target="_blank">
         <img class="media-object"
               src="{{ foundProject.user.github.avatar_url}}"
@@ -10,6 +9,7 @@
       </a>
     </div>
     <div class="media-body">
+      <h2>{{ foundProject.name }}</h2>
       <h4 class="media-heading">
         Created by
         <a href="{{ ownerGithub foundProject.github }}" target="_blank">

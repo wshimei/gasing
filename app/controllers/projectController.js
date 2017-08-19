@@ -28,6 +28,7 @@ function create (req, res, next) {
 
       const newProject = new Project({
         name: req.body.project.name,
+        slug: slugify(req.body.project.name),
         github: req.body.project.github,
         public: req.body.project.public,
         category: req.body.project.category,
@@ -64,17 +65,29 @@ function show (req, res, next) {
 
   Project
   .findOne({
-    name: new RegExp('^' + projectname + '$', 'i')
+    slug: projectname
   })
   .populate('user')
   .exec(function (err, foundProject) {
     if (err) return next(err)
+
+    if( ! foundProject ) {
+      return res.send({
+        params: projectname,
+        foundProject
+      })
+    }
+
 
     res.render('projects/show', {
       params: req.params,
       foundProject
     })
   })
+}
+
+function slugify(projectName) {
+  return `${projectName.toLowerCase().replace(/[\?\"\!]/g, '').split(' ').join('-')}`
 }
 
 module.exports = {
