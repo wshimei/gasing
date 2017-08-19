@@ -1,11 +1,30 @@
 <div class="container">
   <h1>{{ foundProject.name }}</h1>
-  <small>created by {{ foundProject.user.name }}</small>
+  <div class="media">
+    <div class="media-left media-middle">
+      <a href="{{ ownerGithub foundProject.github }}" target="_blank">
+        <img class="media-object"
+              src="{{ foundProject.user.github.avatar_url}}"
+              alt="{{ foundProject.user.name }}"
+              width="100">
+      </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">
+        Created by
+        <a href="{{ ownerGithub foundProject.github }}" target="_blank">
+          {{ foundProject.user.name }}
+        </a>
+      </h4>
+    </div>
+  </div>
 
+
+  <br>
   <pre>
-    {{
+    {{!-- {{
       json params
-    }}
+    }} --}}
 
     {{
       json foundProject
