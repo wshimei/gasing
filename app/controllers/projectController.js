@@ -59,7 +59,12 @@ function remove (req, res, next) {
   })
 }
 
+function show (req, res, next) {
+  res.send(req.params)
+}
+
 module.exports = {
   create,
-  remove
+  remove,
+  show
 }
