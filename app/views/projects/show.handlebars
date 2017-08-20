@@ -19,6 +19,7 @@
     </div>
   </div>
 
+  {{#isOwner LOGGEDIN_USER foundProject.user}}
   <div class="help-block">
     <div class="row">
       <div class="col-md-12">
@@ -29,6 +30,7 @@
     </div>
     {{> projects/edit }}
   </div>
+  {{/isOwner}}
 
   {{!-- <br>
   <pre>
