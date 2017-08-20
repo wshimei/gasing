@@ -8,6 +8,7 @@ var Project = require('../models/project')
 router.get('/', function (req, res, next) {
   Project.find({})
   .populate('user')
+  .sort({ _id: 1 })
   .exec((err, projects) => {
     if (err) return next(err)
     // return res.send(req.user)

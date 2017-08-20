@@ -8,5 +8,9 @@ a {
 }
 
 .project-card {
-  height: 450px;
+  height: 400px;
+}
+
+.project-heading {
+  margin-bottom: 20px;
 }

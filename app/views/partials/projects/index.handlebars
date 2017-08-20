@@ -12,10 +12,9 @@
         </h3>
       </div>
       <div class="panel-body">
-        <p class="lead">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-
+        <a href="/projects/{{ project.slug }}" class="thumbnail">
+          <img src="{{ project.cover }}" alt="{{ project.name }}" width="100%">
+        </a>
         <div class="btn-group btn-group-justified" role="group" aria-label="project button groups">
           <a href="{{project.github}}" class="btn btn-github" role="button">
             <i class="fa fa-github-alt"></i> Github
@@ -43,7 +42,7 @@
       </div>
       <div class="panel-footer">
         <small>
-          created by:
+          developed by
           <a href="{{ ownerGithub project.github }}" target="_blank">
             {{ project.user.name }}
           </a>

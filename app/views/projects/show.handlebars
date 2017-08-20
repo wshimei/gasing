@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="media">
+  <div class="media project-heading">
     <div class="media-left">
       <a href="{{ ownerGithub foundProject.github }}" target="_blank">
         <img class="media-object"
@@ -11,7 +11,7 @@
     <div class="media-body">
       <h2>{{ foundProject.name }}</h2>
       <h4 class="media-heading">
-        Created by
+        developed by
         <a href="{{ ownerGithub foundProject.github }}" target="_blank">
           {{ foundProject.user.name }}
         </a>
@@ -34,13 +34,14 @@
 
   {{#isOwner LOGGEDIN_USER foundProject.user}}
   <div class="help-block">
-    <div class="row">
+    {{!-- TODO: Trigger edit form to show if edit button is clicked --}}
+    {{!-- <div class="row">
       <div class="col-md-12">
         <a href="#" class="btn btn-info btn-block">
           <i class="fa fa-eraser"></i> Edit
         </a>
       </div>
-    </div>
+    </div> --}}
     {{> projects/edit }}
   </div>
 
