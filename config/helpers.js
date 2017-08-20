@@ -34,5 +34,17 @@ module.exports = {
     const rgx = /https:\/\/(github\.com)\/([a-z0-9-_]+)/
     githubLink = githubLink.match(rgx)
     return githubLink[0]
+  },
+  ifEqual: function (v1, v2, options) {
+    if (v1 === v2) {
+      return options.fn(this)
+    }
+    return options.inverse(this)
+  },
+  ifNot: function (v1, v2, options) {
+    if (v1 !== v2) {
+      return options.fn(this)
+    }
+    return options.inverse(this)
   }
 }

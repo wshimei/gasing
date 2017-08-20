@@ -27,6 +27,14 @@ let projectSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
+  },
+  cover: {
+    type: String,
+    // TODO: check if valid url
+  },
+  description: {
+    type: String,
+    // TODO: length validation
   }
 })
 

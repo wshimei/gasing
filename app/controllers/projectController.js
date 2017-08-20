@@ -23,6 +23,7 @@ function create (req, res, next) {
 
     let projectOwner = JSON.parse(body)
 
+    // TODO: may need to refactor this with findOneAndUpdate
     User.findOneOrCreate(projectOwner, function (err, dbUser) {
       if (err) return next(err)
 
@@ -71,13 +72,12 @@ function show (req, res, next) {
   .exec(function (err, foundProject) {
     if (err) return next(err)
 
-    if( ! foundProject ) {
+    if (!foundProject) {
       return res.send({
         params: projectname,
         foundProject
       })
     }
-
 
     res.render('projects/show', {
       params: req.params,
@@ -86,12 +86,23 @@ function show (req, res, next) {
   })
 }
 
-function slugify(projectName) {
+function update (req, res, next) {
+  Project
+  .findByIdAndUpdate(req.params.id, req.body.project, { new: true })
+  .exec(function(err, updatedProject) {
+    if(err) return next(err)
+
+    res.redirect(`/projects/${updatedProject.slug}`)
+  })
+}
+
+function slugify (projectName) {
   return `${projectName.toLowerCase().replace(/[\?\"\!]/g, '').split(' ').join('-')}`
 }
 
 module.exports = {
   create,
   remove,
-  show
+  show,
+  update
 }

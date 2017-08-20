@@ -5,6 +5,8 @@ const projectController = require('../controllers/projectController')
 
 router.post('/', projectController.create)
 router.get('/:projectname', projectController.show)
+
 router.delete('/:id', projectController.remove)
+router.patch('/:id/update', projectController.update)
 
 module.exports = router

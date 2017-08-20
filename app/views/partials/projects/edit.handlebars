@@ -1,77 +1,80 @@
 <div class="row">
-  <h2 class="page-header text-center">Edit Project</h2>
-  <form class="form-horizontal" action="/projects?_method=PATCH" method="post">
-    <div class="form-group">
-      <label class="col-sm-2 control-label" for="project[name]">Project name</label>
-      <div class="col-sm-10">
-        <input type="text"
-                class="form-control"
-                name="project[name]"
-                id="project[name]"
-                placeholder="Type your project name"
-                value="{{ foundProject.name }}">
+  <div class="col-md-12">
+    <h2 class="page-header text-center">Edit Project</h2>
+    <form class="form-horizontal" action="/projects/{{foundProject.id}}/update?_method=PATCH" method="post">
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="project[name]">Project name</label>
+        <div class="col-sm-10">
+          <input type="text"
+          class="form-control"
+          name="project[name]"
+          id="project[name]"
+          placeholder="Type your project name"
+          value="{{ foundProject.name }}">
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-2 control-label" for="project[github]">Github URL</label>
-      <div class="col-sm-10">
-        <input type="text"
-                class="form-control"
-                name="project[github]"
-                id="project[github]"
-                placeholder="Type your project's github url"
-                value="{{ foundProject.github }}">
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="project[github]">Github URL</label>
+        <div class="col-sm-10">
+          <input type="text"
+          class="form-control"
+          name="project[github]"
+          id="project[github]"
+          placeholder="Type your project's github url"
+          value="{{ foundProject.github }}">
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-2 control-label" for="project[public]">Live URL</label>
-      <div class="col-sm-10">
-        <input type="text"
-                class="form-control"
-                name="project[public]"
-                id="project[public]"
-                placeholder="Type your project's live url"
-                value="{{ foundProject.public }}">
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="project[public]">Live URL</label>
+        <div class="col-sm-10">
+          <input type="text"
+          class="form-control"
+          name="project[public]"
+          id="project[public]"
+          placeholder="Type your project's live url"
+          value="{{ foundProject.public }}">
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-2 control-label" for="project[category]">Category</label>
-      <div class="col-sm-10">
-        <select class="form-control" name="project[category]">
-          {{#times 5}}
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="project[category]">Category</label>
+        <div class="col-sm-10">
+          <select class="form-control" name="project[category]">
+            {{#times 5}}
             {{!-- TODO: check the current category, put selected attr  --}}
-            {{#if true}}
+            {{#ifNot this 5}}
             <option value="{{this}}">Project {{this}}</option>
             {{else}}
             <option value="{{this}}">Other</option>
-            {{/if}}
-          {{/times}}
-        </select>
+            {{/ifNot}}
+            {{/times}}
+          </select>
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-2 control-label" for="project[cover]">Cover URL</label>
-      <div class="col-sm-10">
-        <input type="text"
-                class="form-control"
-                name="project[cover]"
-                id="project[cover]"
-                placeholder="Type your project's cover photo">
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="project[cover]">Cover URL</label>
+        <div class="col-sm-10">
+          <input type="text"
+          class="form-control"
+          name="project[cover]"
+          id="project[cover]"
+          placeholder="Type your project's cover photo"
+          value="{{ foundProject.cover }}">
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-2 control-label" for="project[description]">Description</label>
-      <div class="col-sm-10">
-        <textarea class="form-control"
-                name="project[description]"
-                id="project[description]"
-                rows="4">{{ foundProject.description }}</textarea>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="project[description]">Description</label>
+        <div class="col-sm-10">
+          <textarea class="form-control"
+          name="project[description]"
+          id="project[description]"
+          rows="4">{{ foundProject.description }}</textarea>
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-primary">Update</button>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
