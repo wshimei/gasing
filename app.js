@@ -16,16 +16,13 @@ var MongoStore = require('connect-mongo')(session)
 var passport = require('passport')
 var methodOverride = require('method-override')
 
-var routes = require('./routes/index')
-var users = require('./routes/user')
-var projects = require('./routes/project')
-// var auths = require('./routes/auth')
-
 var app = express()
 
 var env = process.env.NODE_ENV || 'development'
 app.locals.ENV = env
-app.locals.ENV_DEVELOPMENT = env == 'development'
+app.locals.ENV_DEVELOPMENT = env === 'development'
+app.locals.ADMINS = process.env.ADMINS.split(':')
+app.locals.TITLE = config.app.name
 
 // db setup
 const mongoose = require('mongoose')
@@ -57,13 +54,30 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store: new MongoStore({
-    url: 'mongodb://localhost/gasing-mvc-development'
+    url: process.env.MONGODB_URI
   })
 }))
 app.use(flash())
 // setup passport and passport session
 app.use(passport.initialize())
 app.use(passport.session())
+
+// setup local variables for all views
+app.use(function (req, res, next) {
+  app.locals.flash = {
+    errors: req.flash('errors'),
+    infos: req.flash('infos')
+  }
+
+  app.locals.LOGGEDIN_USER = req.user || null
+
+  next()
+})
+
+var routes = require('./app/routes/index')
+var users = require('./app/routes/user')
+var projects = require('./app/routes/project')
+// var auths = require('./routes/auth')
 
 app.use('/', routes)
 app.use('/users', users)
@@ -91,17 +105,17 @@ function (req, res) {
 
 app.delete('/logout', (req, res) => {
   req.logout()
-  res.redirect('/')
+  return res.redirect('/')
 })
 
-// / catch 404 and forward to error handler
+// catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error('Not Found')
   err.status = 404
   next(err)
 })
 
-// / error handlers
+// error handlers
 
 // development error handler
 // will print stacktrace

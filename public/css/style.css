@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+.project-card {
+  height: 400px;
+}
+
+.project-heading {
+  margin-bottom: 20px;
+}

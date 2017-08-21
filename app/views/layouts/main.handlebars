@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width">
   <title>{{title }}</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="/components/font-awesome/css/font-awesome.min.css">
+  <script src="https://use.fontawesome.com/77526f69b7.js"></script>
   <link rel="stylesheet" href="/components/bootstrap-social/bootstrap-social.css">
   <link rel="stylesheet" href="/css/style.css">
   {{#if ENV_DEVELOPMENT}}
@@ -23,13 +23,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">{{ title }}</a>
+        <a class="navbar-brand" href="/">{{ TITLE }}</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <div class="nav navbar-nav navbar-right">
-          {{#if loggedin_user}}
+          {{#if LOGGEDIN_USER}}
           <form method="POST" action="/logout/{{_id}}?_method=DELETE">
             <button class="btn btn-social btn-github navbar-btn">
               <span class="fa fa-github"></span> Logout

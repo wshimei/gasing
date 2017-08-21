@@ -1,0 +1,54 @@
+<div class="row">
+  {{#each projects as |project|}}
+  <div class="col-md-4 project-card">
+    {{#isOwner ../LOGGEDIN_USER project.user}}
+    <div class="panel panel-primary">
+    {{ else }}
+    <div class="panel panel-default">
+    {{/isOwner}}
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          {{ project.name }}
+        </h3>
+      </div>
+      <div class="panel-body">
+        <a href="/projects/{{ project.slug }}" class="thumbnail">
+          <img src="{{ project.cover }}" alt="{{ project.name }}" width="100%">
+        </a>
+        <div class="btn-group btn-group-justified" role="group" aria-label="project button groups">
+          <a href="{{project.github}}" class="btn btn-github" role="button">
+            <i class="fa fa-github-alt"></i> Github
+          </a>
+          <a href="/projects/{{ project.slug }}" class="btn btn-github" role="button">
+            <i class="fa fa-eye"></i> Detail
+          </a>
+          <a href="/{{project.public}}" class="btn btn-github" role="button">
+            <i class="fa fa-play"></i> View
+          </a>
+        </div>
+
+        {{#isOwner ../LOGGEDIN_USER project.user}}
+        <div class="help-block">
+          <form method="POST" action="/projects/{{ project._id }}?_method=delete">
+            <a href="/projects/{{ project.slug }}/edit" class="btn btn-info btn-block">
+              <i class="fa fa-eraser"></i> Edit
+            </a>
+            <button class="btn btn-block btn-danger">
+              <i class="fa fa-trash"></i> Delete
+            </button>
+          </form>
+        </div>
+        {{/isOwner}}
+      </div>
+      <div class="panel-footer">
+        <small>
+          developed by
+          <a href="{{ ownerGithub project.github }}" target="_blank">
+            {{ project.user.name }}
+          </a>
+        </small>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>

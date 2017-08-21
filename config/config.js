@@ -1,26 +1,23 @@
-var path = require('path'),
-  rootPath = path.normalize(__dirname + '/..'),
-  env = process.env.NODE_ENV || 'development'
+const path = require('path')
+const rootPath = path.normalize(__dirname + '/..')
+const handlebarsConfig = require('./handlebars')
+
+const env = process.env.NODE_ENV || 'development'
+const appname = 'GA-Sing'
+
+// TODO: Merge same configuration, and refactor those that are difference
+//       separate env-specific configuration on a different file
 
 var config = {
   development: {
     root: rootPath,
     app: {
-      name: 'gasing-mvc'
+      name: appname
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/gasing-mvc-development',
+    db: process.env.MONGODB_URI,
     github_callback: 'http://localhost:3000/auth/github/callback',
-    hbs: {
-      layoutsDir: rootPath + '/app/views/layouts/',
-      defaultLayout: 'main',
-      partialsDir: [rootPath + '/app/views/partials/'],
-      helpers: {
-        json: function (context) {
-          return JSON.stringify(context)
-        }
-      }
-    }
+    hbs: handlebarsConfig
   },
 
   test: {
@@ -35,11 +32,12 @@ var config = {
   production: {
     root: rootPath,
     app: {
-      name: 'gasing-mvc'
+      name: appname
     },
     port: process.env.PORT || 3000,
     db: process.env.MONGODB_URI,
-    github_callback: 'https://gasing.herokuapp.com/auth/github/callback'
+    github_callback: 'https://gasing.herokuapp.com/auth/github/callback',
+    hbs: handlebarsConfig
   }
 }
 
