@@ -24,7 +24,13 @@ let projectSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }
+  },
+  likedBy: [{
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  }]
 })
 
 const Project = mongoose.model('Project', projectSchema)
