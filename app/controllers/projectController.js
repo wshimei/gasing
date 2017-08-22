@@ -89,8 +89,8 @@ function show (req, res, next) {
 function update (req, res, next) {
   Project
   .findByIdAndUpdate(req.params.id, req.body.project, { new: true })
-  .exec(function(err, updatedProject) {
-    if(err) return next(err)
+  .exec(function (err, updatedProject) {
+    if (err) return next(err)
 
     res.redirect(`/projects/${updatedProject.slug}`)
   })
@@ -100,6 +100,15 @@ function slugify (projectName) {
   return `${projectName.toLowerCase().replace(/[\?\"\!]/g, '').split(' ').join('-')}`
 }
 
+function like (req, res, next) {
+  Project
+  .findByIdAndUpdate(req.params.id, req.body.project, { new: true })
+  .exec(function (err, liked) {
+    if (err) return next(err)
+
+    res.redirect(`/`)
+  })
+}
 module.exports = {
   create,
   remove,

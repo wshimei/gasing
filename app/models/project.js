@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+var githubRegex = /^(https?:\/\/github?)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
 var urlRegex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
 
 let projectSchema = new Schema({
@@ -13,7 +14,7 @@ let projectSchema = new Schema({
   github: {
     type: String,
     required: [true, 'Please write the project github url'],
-    match: [urlRegex, 'The github url is invalid']
+    match: [githubRegex, 'The github url is invalid']
   },
   public: {
     type: String,
