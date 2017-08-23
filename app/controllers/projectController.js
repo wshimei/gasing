@@ -88,7 +88,7 @@ function show (req, res, next) {
 
 function update (req, res, next) {
   Project
-  .findByIdAndUpdate(req.params.id, req.body.like, { new: true })
+  .findByIdAndUpdate(req.params.id, req.body.project, { new: true })
   .exec(function (err, updatedProject) {
     if (err) return next(err)
 
@@ -101,13 +101,16 @@ function slugify (projectName) {
 }
 
 function like (req, res, next) {
-  // Project
-  // .findByIdAndUpdate(req.params.id, req.body.project, { new: true })
-  // .exec(function (err, liked) {
-  //   if (err) return next(err)
-  //
-  //   res.redirect(`/`)
-  // })
+  const likedBy = req.body.likedBy
+
+  Project
+  .findById(req.params.id, function (err, foundProject, next) {
+    if (err) return next(err)
+
+    foundProject.likedBy.push(likedBy)
+    foundProject.save(err)
+    res.send(foundProject)
+  })
 }
 
 module.exports = {

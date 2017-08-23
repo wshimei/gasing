@@ -8,5 +8,6 @@ router.get('/:projectname', projectController.show)
 
 router.delete('/:id', projectController.remove)
 router.patch('/:id/update', projectController.update)
+router.post('/:id/like', projectController.like)
 
 module.exports = router

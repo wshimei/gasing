@@ -29,12 +29,7 @@ let projectSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  likedBy: [{
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    }
-  }],
+  likedBy: [],
   cover: {
     type: String
     // TODO: check if valid url

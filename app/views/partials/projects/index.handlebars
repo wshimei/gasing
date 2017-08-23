@@ -11,10 +11,12 @@
           {{ project.name }}
 
           <form class="like pull-right" action="#" method="post">
-            <input type="hidden" name="likedBy" value="{{ ../LOGGEDIN_USER.name }}">
+            <input type="hidden" name="project" value="{{ project.slug }}">
             <input type="hidden" name="projectId" value="{{ project.id }}">
-            <button class="astext" type="submit"><i class="fa fa-thumbs-o-up pull-right" aria-hidden="true"></i></button>
-            {{!-- <i class="fa fa-thumbs-up" aria-hidden="true"></i> --}}
+            <input type="hidden" name="likedBy" value="{{ ../LOGGEDIN_USER.name }}">
+            <button class="astext" type="submit">
+              <i class="fa fa-thumbs-o-up pull-right" id="thumbs-o-up-{{project.id}}" aria-hidden="true"></i>
+            </button>
           </form>
 
         </h3>

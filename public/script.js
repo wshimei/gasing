@@ -7,11 +7,19 @@ $(function () {
 
     var $liked = $(this).serializeArray()
 
-    $.get('/').done(function (data) {
-        alert(data)
-      })
+    $.post(`/projects/${$liked[1].value}/like`, {
+      project: $liked[0].value,
+      projectId: $liked[1].value,
+      likedBy: $liked[2].value
+    }).done(function (data) {
+      console.log(`#thumbs-up-${data._id}`)
+      var openThumbsUp = $(`#thumbs-o-up-${data._id}`)
+      // var closeThumbsUp = $(`#thumbs-up-${data._id}`)
 
-    console.log($liked[0].value)
-    console.log($liked[1].value)
+      openThumbsUp.attr('class', 'fa fa-thumbs-up pull-right')
+    })
+
+    console.log($liked)
+    // console.log($liked[1].value)
   })
 })
