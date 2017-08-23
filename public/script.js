@@ -12,14 +12,9 @@ $(function () {
       projectId: $liked[1].value,
       likedBy: $liked[2].value
     }).done(function (data) {
-      console.log(`#thumbs-up-${data._id}`)
-      var openThumbsUp = $(`#thumbs-o-up-${data._id}`)
-      // var closeThumbsUp = $(`#thumbs-up-${data._id}`)
+      var thumbsUp = $(`#thumbs-o-up-${data._id}`)
 
-      openThumbsUp.attr('class', 'fa fa-thumbs-up pull-right')
+      thumbsUp.attr('class', 'fa fa-thumbs-up pull-right')
     })
-
-    console.log($liked)
-    // console.log($liked[1].value)
   })
 })
