@@ -70,6 +70,7 @@ app.use(function (req, res, next) {
   }
 
   app.locals.LOGGEDIN_USER = req.user || null
+  app.locals.isAuthenticated = req.isAuthenticated()
 
   next()
 })
