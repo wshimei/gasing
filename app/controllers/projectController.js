@@ -33,9 +33,10 @@ function create (req, res, next) {
         github: req.body.project.github,
         public: req.body.project.public,
         category: req.body.project.category,
-        user: dbUser.id
+        user: []
       })
 
+      newProject.user.push(dbUser.id)
       newProject.save(function (err) {
         if (err) {
           req.flash('errors', err.errors)
@@ -108,7 +109,12 @@ function like (req, res, next) {
     if (err) return next(err)
 
     foundProject.likedBy.push(likedBy)
-    foundProject.save(err)
+    foundProject.save(function (err) {
+      if (err) {
+        req.flash('errors', err.errors)
+        return next(err)
+      }
+    })
     res.send(foundProject)
   })
 }

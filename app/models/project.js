@@ -25,10 +25,10 @@ let projectSchema = new Schema({
     type: Number,
     required: [true, 'Please choose a category']
   },
-  user: {
+  user: [{
     type: Schema.Types.ObjectId,
     ref: 'User'
-  },
+  }],
   likedBy: [],
   cover: {
     type: String

@@ -9,7 +9,6 @@
       <div class="panel-heading">
         <h3 class="panel-title">
           {{ project.name }}
-          <pre>{{ ../LOGGEDIN_USER.name }}</pre>
 
           {{#each project.likedBy as |likedBy|}}
             'liked by' {{ likedBy }}
@@ -61,9 +60,11 @@
       <div class="panel-footer">
         <small>
           developed by
+          {{#each project.user as |user|}}
           <a href="{{ ownerGithub project.github }}" target="_blank">
-            {{ project.user.name }}
+            {{ user.name }}
           </a>
+          {{/each}}
         </small>
       </div>
     </div>
